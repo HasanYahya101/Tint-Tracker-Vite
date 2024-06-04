@@ -16,11 +16,24 @@ export function Playground() {
 
     const [defaultBrightness, setDefaultBrightness] = useState(100);
 
+    const [rValue, setRValue] = useState(255);
+
+    const [gValue, setGValue] = useState(0);
+
+    const [bValue, setBValue] = useState(0);
+
+    const [hexValue, setHexValue] = useState("#FF0000");
+
+
+
+    const rgbToHex = (r, g, b) => {
+        return `#${((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1)}`;
+    };
+
     useEffect(() => {
         localStorage.removeItem('uploadedImage');
     }, []);
 
-    // get image from local storage
     useEffect(() => {
         const storedImage = localStorage.getItem('uploadedImage');
         if (storedImage) {
@@ -69,6 +82,31 @@ export function Playground() {
         };
     };
 
+    const handleImageClick = (event) => {
+        const img = event.target;
+        const canvas = document.createElement("canvas");
+        const ctx = canvas.getContext("2d");
+        canvas.width = img.width;
+        canvas.height = img.height;
+        ctx.drawImage(img, 0, 0, img.width, img.height);
+
+        const rect = img.getBoundingClientRect();
+        const scaleX = img.width / rect.width;
+        const scaleY = img.height / rect.height;
+        const x = (event.clientX - rect.left) * scaleX;
+        const y = (event.clientY - rect.top) * scaleY;
+
+        if (x >= 0 && x < img.width && y >= 0 && y < img.height) {
+            const pixel = ctx.getImageData(x, y, 1, 1).data;
+            const [r, g, b] = pixel;
+
+            setRValue(r);
+            setGValue(g);
+            setBValue(b);
+            setHexValue(rgbToHex(r, g, b));
+        }
+    };
+
     if (!imageUploaded) {
         return (
             <Upload setImage={setImage} setImageUploaded={setImageUploaded} image={image} imageUploaded={imageUploaded}
@@ -94,8 +132,9 @@ export function Playground() {
                                 }}
                                 width={500} />
                             <div className="absolute inset-0 flex items-center justify-center border-black">
-                                <div className="bg-gray-900 dark:bg-gray-900 rounded-lg border-black shadow-lg object-cover overflow-hidden" style={{ aspectRatio: "500/500", objectFit: "cover" }}>
-                                    {image !== null ? <img src={image} alt="Uploaded Image" className="w-full h-full object-contain" /> : <EyeIcon className="w-6 h-6 text-gray-500 dark:text-gray-400" />}
+                                <div className="bg-black dark:bg-white rounded-lg border-black shadow-lg object-cover overflow-hidden" style={{ aspectRatio: "500/500", objectFit: "cover" }}>
+                                    {image !== null ? <img src={image} onClick={handleImageClick}
+                                        alt="Uploaded Image" className="w-full h-full object-contain" /> : <EyeIcon className="w-6 h-6 text-gray-500 dark:text-gray-400" />}
                                 </div>
                             </div>
                         </div>
@@ -103,11 +142,13 @@ export function Playground() {
                             <div className="flex items-center gap-4">
                                 <div
                                     className="w-16 h-16 rounded-full border-4 border-gray-200 dark:border-gray-800 flex items-center justify-center">
-                                    <div className="w-10 h-10 rounded-full bg-[#ff0000]" />
+                                    <div className="w-10 h-10 rounded-full"
+                                        style={{ backgroundColor: rgbToHex(rValue, gValue, bValue) }}
+                                    />
                                 </div>
                                 <div className="flex-1 grid gap-1">
                                     <div className="text-sm font-medium text-gray-500 dark:text-gray-400">HEX</div>
-                                    <div className="text-lg font-semibold text-gray-900 dark:text-gray-50">#FF0000</div>
+                                    <div className="text-lg font-semibold text-gray-900 dark:text-gray-50">{hexValue}</div>
                                 </div>
                             </div>
                             <div className="grid gap-4">
@@ -137,7 +178,7 @@ export function Playground() {
                                 <div className="flex items-center gap-4">
                                     <div
                                         className="w-16 text-right text-sm font-medium text-gray-500 dark:text-gray-400">RGB</div>
-                                    <div className="flex-1 text-lg font-semibold text-gray-900 dark:text-gray-50">255, 0, 0</div>
+                                    <div className="flex-1 text-lg font-semibold text-gray-900 dark:text-gray-50">{rValue}, {gValue}, {bValue}</div>
                                 </div>
                                 <div className="flex items-center gap-4">
                                     <div

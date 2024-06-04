@@ -110,7 +110,7 @@ export default function Component({ image, setImage, setImageUploaded, imageUplo
                     {image ? (
                         <img src={image} alt="Uploaded Image" className="w-full h-full object-contain" />
                     ) : (
-                        <div className="text-gray-500 dark:text-gray-400 text-lg">Drag and drop an image or click to upload</div>
+                        <div className="text-gray-500 dark:text-gray-400 text-lg">Click to upload an Image</div>
                     )}
                 </div>
                 <input
