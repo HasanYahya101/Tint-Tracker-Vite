@@ -1,6 +1,7 @@
 import { useRef } from "react";
 import { useState } from "react";
 import { useEffect } from "react";
+import { Toaster, toast } from "sonner";
 
 export default function Component({ image, setImage, setImageUploaded, imageUploaded }) {
 
@@ -27,6 +28,16 @@ export default function Component({ image, setImage, setImageUploaded, imageUplo
         reader.readAsDataURL(file);
 
         setImageUploaded(true);
+
+        toast.success("Image uploaded successfully", {
+            action:
+            {
+                text: 'Close',
+                onClick: () => {
+                    toast.dismiss();
+                }
+            }
+        });
     };
 
     const handleDragOver = (e) => {
@@ -35,6 +46,19 @@ export default function Component({ image, setImage, setImageUploaded, imageUplo
 
     const handleDrop = (e) => {
         e.preventDefault();
+        // if file is not an image
+        if (!e.dataTransfer.files[0].type.includes('image')) {
+            toast.error("File type not supported", {
+                action:
+                {
+                    label: 'Close',
+                    onClick: () => {
+                        toast.dismiss();
+                    }
+                }
+            });
+            return;
+        }
         const file = e.dataTransfer.files[0];
         const reader = new FileReader();
         reader.onloadend = () => {
@@ -44,6 +68,8 @@ export default function Component({ image, setImage, setImageUploaded, imageUplo
             extractColorsFromBase64(base64data);
         };
         reader.readAsDataURL(file);
+
+        setImageUploaded(true);
     };
 
     const handleDivClick = () => {
@@ -100,6 +126,7 @@ export default function Component({ image, setImage, setImageUploaded, imageUplo
 
     return (
         <div className="flex flex-col items-center justify-center h-screen bg-gray-100 dark:bg-gray-900">
+            <Toaster />
             <div className="max-w-4xl w-full p-4">
                 <div
                     className="w-full aspect-video bg-gray-200 dark:bg-gray-800 rounded-lg overflow-hidden flex items-center justify-center cursor-pointer"
@@ -111,7 +138,7 @@ export default function Component({ image, setImage, setImageUploaded, imageUplo
                     {image ? (
                         <img src={image} alt="Uploaded Image" className="w-full h-full object-contain" />
                     ) : (
-                        <div className="text-gray-500 dark:text-gray-400 text-lg">Click to upload an Image</div>
+                        <div className="text-gray-500 dark:text-gray-400 text-lg">Click or Drop an Image to upload it</div>
                     )}
                 </div>
                 <input
