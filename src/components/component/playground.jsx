@@ -173,9 +173,9 @@ export function Playground() {
     else {
         return (
             <div
-                className="flex flex-col items-center justify-center h-screen bg-gray-100 dark:bg-gray-950 ">
+                className="flex flex-col items-center justify-center p-4 h-screen bg-gray-100 dark:bg-gray-950 ">
                 <div
-                    className="max-w-3xl w-full bg-white dark:bg-gray-900 p-4 rounded-lg shadow-lg overflow-hidden">
+                    className="max-w-3xl w-full bg-white dark:bg-gray-900 rounded-lg shadow-lg overflow-hidden">
                     <div className="grid grid-cols-2 gap-6 p-6">
                         <div className="relative">
                             <img

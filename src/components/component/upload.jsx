@@ -100,7 +100,7 @@ export default function Component({ image, setImage, setImageUploaded, imageUplo
 
     return (
         <div className="flex flex-col items-center justify-center h-screen bg-gray-100 dark:bg-gray-900">
-            <div className="max-w-4xl w-full p-2">
+            <div className="max-w-4xl w-full p-4">
                 <div
                     className="w-full aspect-video bg-gray-200 dark:bg-gray-800 rounded-lg overflow-hidden flex items-center justify-center cursor-pointer"
                     onDragOver={handleDragOver}
