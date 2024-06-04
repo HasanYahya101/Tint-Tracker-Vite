@@ -13,6 +13,11 @@ Radix UI and ShadCN components were used to create the UI of the website. Moreov
 This project was deployed to Github Pages and can be tested there. No servers or databases were used in this Project.
 
 ## Preview
+![Screenshot 2024-06-04 150341](https://github.com/HasanYahya101/Tint-Tracker-Vite/assets/118683092/37b5c342-f49c-4929-bb81-36593ae96fe8)
+![Screenshot 2024-06-04 150417](https://github.com/HasanYahya101/Tint-Tracker-Vite/assets/118683092/f730963f-af4b-4a9a-b0bc-3f5d94046e8f)
+![Screenshot 2024-06-04 150434](https://github.com/HasanYahya101/Tint-Tracker-Vite/assets/118683092/f179ac37-b1f3-43aa-9179-d7e735580619)
+![Screenshot 2024-06-04 150444](https://github.com/HasanYahya101/Tint-Tracker-Vite/assets/118683092/8c6a1a77-b1b0-41ef-a7cb-a95e7c89a429)
+
 
 ## React + Vite
 
