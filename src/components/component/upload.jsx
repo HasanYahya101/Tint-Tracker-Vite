@@ -106,6 +106,7 @@ export default function Component({ image, setImage, setImageUploaded, imageUplo
                     onDragOver={handleDragOver}
                     onDrop={handleDrop}
                     onClick={handleDivClick}
+                    style={{ border: imageUploaded ? 'none' : '3px dashed #ccc' }}
                 >
                     {image ? (
                         <img src={image} alt="Uploaded Image" className="w-full h-full object-contain" />
