@@ -220,7 +220,40 @@ export function Playground() {
             });
     };
 
-    hvalueChanged = (value) => {
+    const hvalueChanged = (value) => {
+        // set hue value
+        setDefaultHue(value);
+        // convert hsl to rgb
+        const rgb = hslToRgb(value, defaultSaturation, defaultBrightness);
+        setRValue(rgb.r);
+        setGValue(rgb.g);
+        setBValue(rgb.b);
+        // convert to hex
+        setHexValue(rgbToHex(rgb.r, rgb.g, rgb.b));
+    };
+
+    const svalueChanged = (value) => {
+        // set saturation value
+        setDefaultSaturation(value);
+        // convert hsl to rgb
+        const rgb = hslToRgb(defaultHue, value, defaultBrightness);
+        setRValue(rgb.r);
+        setGValue(rgb.g);
+        setBValue(rgb.b);
+        // convert to hex
+        setHexValue(rgbToHex(rgb.r, rgb.g, rgb.b));
+    };
+
+    const _lvalueChanged = (value) => {
+        // set brightness value
+        setDefaultBrightness(value);
+        // convert hsl to rgb
+        const rgb = hslToRgb(defaultHue, defaultSaturation, value);
+        setRValue(rgb.r);
+        setGValue(rgb.g);
+        setBValue(rgb.b);
+        // convert to hex
+        setHexValue(rgbToHex(rgb.r, rgb.g, rgb.b));
     };
 
     if (!imageUploaded) {
@@ -277,7 +310,7 @@ export function Playground() {
                                 <div className="flex items-center gap-4">
                                     <div
                                         className="w-16 text-right text-sm font-medium text-gray-500 dark:text-gray-400">Hue</div>
-                                    <Slider className="flex-1" value={[defaultHue]} max={360} step={1} onValueChange={(value) => setDefaultHue(value)}
+                                    <Slider className="flex-1" value={[defaultHue]} max={360} step={1} onValueChange={(value) => hvalueChanged(value)}
                                     />
                                     <div
                                         className="w-16 text-right text-sm font-medium text-gray-900 dark:text-gray-50">{defaultHue}°</div>
@@ -285,7 +318,7 @@ export function Playground() {
                                 <div className="flex items-center gap-4">
                                     <div
                                         className="w-16 text-right text-sm font-medium text-gray-500 dark:text-gray-400">Saturation</div>
-                                    <Slider className="flex-1" value={[defaultSaturation]} max={100} step={1} onValueChange={(value) => setDefaultSaturation(value)}
+                                    <Slider className="flex-1" value={[defaultSaturation]} max={100} step={1} onValueChange={(value) => svalueChanged(value)}
                                     />
                                     <div
                                         className="w-16 text-right text-sm font-medium text-gray-900 dark:text-gray-50">{defaultSaturation}%</div>
@@ -293,7 +326,7 @@ export function Playground() {
                                 <div className="flex items-center gap-4">
                                     <div
                                         className="w-16 text-right text-sm font-medium text-gray-500 dark:text-gray-400">Brightness</div>
-                                    <Slider className="flex-1" value={[defaultBrightness]} max={100} step={1} onValueChange={(value) => setDefaultBrightness(value)}
+                                    <Slider className="flex-1" value={[defaultBrightness]} max={100} step={1} onValueChange={(value) => _lvalueChanged(value)}
                                     />
                                     <div
                                         className="w-16 text-right text-sm font-medium text-gray-900 dark:text-gray-50">{defaultBrightness}%</div>
