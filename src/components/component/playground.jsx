@@ -67,7 +67,7 @@ export function Playground() {
                 extractColorsFromBase64(dataURL);
             };
         }
-    }, []);
+    }, [imageUploaded]);
 
     const extractColorsFromBase64 = (base64) => {
         const img = new Image();
@@ -204,10 +204,9 @@ export function Playground() {
                                     objectFit: "cover",
                                 }}
                                 width={500} />
-                            <div className="absolute inset-0 flex items-center justify-center border-black">
-                                <div className="bg-black dark:bg-white rounded-lg border-black shadow-lg object-cover overflow-hidden" style={{ aspectRatio: "500/500", objectFit: "cover" }}>
-                                    {image !== null ? <img src={image} onClick={handleImageClick}
-                                        alt="Uploaded Image" className="w-full h-full object-contain" /> : <EyeIcon className="w-6 h-6 text-gray-500 dark:text-gray-400" />}
+                            <div className="absolute inset-0 flex items-center justify-center border-black" style={{ userSelect: "none", overflow: "hidden", scrollbarWidth: "none" }}>
+                                <div className="bg-black dark:bg-white rounded-lg border-black shadow-lg object-cover overflow-auto" style={{ aspectRatio: "500/500", objectFit: "cover", scrollbarWidth: "none" }}>
+                                    {image !== null ? <img src={image} onClick={handleImageClick} alt="Uploaded Image" className="object-contain" /> : <EyeIcon className="w-6 h-6 text-gray-500 dark:text-gray-400" />}
                                 </div>
                             </div>
                         </div>
