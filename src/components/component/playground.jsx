@@ -10,6 +10,12 @@ export function Playground() {
 
     const [imageUploaded, setImageUploaded] = useState(false);
 
+    const [defaultHue, setDefaultHue] = useState(0);
+
+    const [defaultSaturation, setDefaultSaturation] = useState(100);
+
+    const [defaultBrightness, setDefaultBrightness] = useState(100);
+
     useEffect(() => {
         localStorage.removeItem('uploadedImage');
     }, []);
@@ -19,8 +25,49 @@ export function Playground() {
         const storedImage = localStorage.getItem('uploadedImage');
         if (storedImage) {
             setImage(storedImage);
+            extractColorsFromBase64(storedImage);
         }
     }, []);
+
+    const extractColorsFromBase64 = (base64) => {
+        const img = new Image();
+        img.src = base64;
+        img.onload = () => {
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+            canvas.width = img.width;
+            canvas.height = img.height;
+            ctx.drawImage(img, 0, 0, img.width, img.height);
+            const imageData = ctx.getImageData(0, 0, img.width, img.height);
+            const data = imageData.data;
+            const colors = [];
+            for (let i = 0; i < data.length; i += 4) {
+                const r = data[i];
+                const g = data[i + 1];
+                const b = data[i + 2];
+                const a = data[i + 3];
+                if (a > 0) {
+                    const hex = rgbToHex(r, g, b);
+                    colors.push(hex);
+                }
+            }
+            const colorMap = {};
+            colors.forEach((color) => {
+                if (color in colorMap) {
+                    colorMap[color] += 1;
+                } else {
+                    colorMap[color] = 1;
+                }
+            });
+            const sortedColors = Object.keys(colorMap).sort((a, b) => colorMap[b] - colorMap[a]);
+            const dominantColor = sortedColors[0];
+            const rgb = hexToRgb(dominantColor);
+            const hsl = rgbToHsl(rgb.r, rgb.g, rgb.b);
+            setDefaultHue(hsl.h);
+            setDefaultSaturation(hsl.s);
+            setDefaultBrightness(hsl.l);
+        };
+    };
 
     if (!imageUploaded) {
         return (
