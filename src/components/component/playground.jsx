@@ -324,4 +324,3 @@ function CopyIcon(props) {
         </svg>
     );
 }
-
