@@ -116,10 +116,11 @@ export default function Component({ image, setImage, setImageUploaded, imageUplo
                 </div>
                 <input
                     type="file"
-                    accept="image/*"
+                    accept="image/jpeg,image/jpg,image/png,image/webp"
                     ref={fileInputRef}
                     onChange={handleImageUpload}
                     className="hidden"
+                    limit="1"
                 />
             </div>
         </div>
