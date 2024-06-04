@@ -76,9 +76,6 @@ export function Playground() {
             const dominantColor = sortedColors[0];
             const rgb = hexToRgb(dominantColor);
             const hsl = rgbToHsl(rgb.r, rgb.g, rgb.b);
-            setDefaultHue(hsl.h);
-            setDefaultSaturation(hsl.s);
-            setDefaultBrightness(hsl.l);
         };
     };
 
@@ -96,15 +93,64 @@ export function Playground() {
         const x = (event.clientX - rect.left) * scaleX;
         const y = (event.clientY - rect.top) * scaleY;
 
-        if (x >= 0 && x < img.width && y >= 0 && y < img.height) {
-            const pixel = ctx.getImageData(x, y, 1, 1).data;
-            const [r, g, b] = pixel;
 
-            setRValue(r);
-            setGValue(g);
-            setBValue(b);
-            setHexValue(rgbToHex(r, g, b));
+        const pixel = ctx.getImageData(x, y, 1, 1).data;
+        const [r, g, b] = pixel;
+
+        setRValue(r);
+        setGValue(g);
+        setBValue(b);
+        setHexValue(rgbToHex(r, g, b));
+
+        // set hue, saturation, brightness
+        const hsl = rgbToHsl(r, g, b);
+        setDefaultHue(hsl.h);
+        setDefaultSaturation(hsl.s);
+        setDefaultBrightness(hsl.l);
+    };
+
+    const hexToRgb = (hex) => {
+        const match = hex.replace(/#/, '').match(/.{1,2}/g);
+        return {
+            r: parseInt(match[0], 16),
+            g: parseInt(match[1], 16),
+            b: parseInt(match[2], 16),
+        };
+    };
+
+    const rgbToHsl = (r, g, b) => {
+        r /= 255;
+        g /= 255;
+        b /= 255;
+
+        const max = Math.max(r, g, b);
+        const min = Math.min(r, g, b);
+        let h, s, l = (max + min) / 2;
+
+        if (max === min) {
+            h = s = 0;
+        } else {
+            const d = max - min;
+            s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+            switch (max) {
+                case r:
+                    h = ((g - b) / d) + (g < b ? 6 : 0);
+                    break;
+                case g:
+                    h = ((b - r) / d) + 2;
+                    break;
+                case b:
+                    h = ((r - g) / d) + 4;
+                    break;
+            }
+            h /= 6;
         }
+
+        h = Math.round(h * 360);
+        s = Math.round(s * 100);
+        l = Math.round(l * 100);
+
+        return { h, s, l };
     };
 
     if (!imageUploaded) {
@@ -155,23 +201,25 @@ export function Playground() {
                                 <div className="flex items-center gap-4">
                                     <div
                                         className="w-16 text-right text-sm font-medium text-gray-500 dark:text-gray-400">Hue</div>
-                                    <Slider className="flex-1" defaultValue={[0]} max={360} step={1} />
+                                    <Slider className="flex-1" defaultValue={[defaultHue]} max={360} step={1}
+                                    />
                                     <div
-                                        className="w-16 text-right text-sm font-medium text-gray-900 dark:text-gray-50">0°</div>
+                                        className="w-16 text-right text-sm font-medium text-gray-900 dark:text-gray-50">{defaultHue}°</div>
                                 </div>
                                 <div className="flex items-center gap-4">
                                     <div
                                         className="w-16 text-right text-sm font-medium text-gray-500 dark:text-gray-400">Saturation</div>
-                                    <Slider className="flex-1" defaultValue={[100]} max={100} step={1} />
+                                    <Slider className="flex-1" defaultValue={[defaultSaturation]} max={100} step={1} />
                                     <div
-                                        className="w-16 text-right text-sm font-medium text-gray-900 dark:text-gray-50">100%</div>
+                                        className="w-16 text-right text-sm font-medium text-gray-900 dark:text-gray-50">{defaultSaturation}%</div>
                                 </div>
                                 <div className="flex items-center gap-4">
                                     <div
                                         className="w-16 text-right text-sm font-medium text-gray-500 dark:text-gray-400">Brightness</div>
-                                    <Slider className="flex-1" defaultValue={[100]} max={100} step={1} />
+                                    <Slider className="flex-1" defaultValue={[defaultBrightness]} max={100} step={1}
+                                    />
                                     <div
-                                        className="w-16 text-right text-sm font-medium text-gray-900 dark:text-gray-50">100%</div>
+                                        className="w-16 text-right text-sm font-medium text-gray-900 dark:text-gray-50">{defaultBrightness}%</div>
                                 </div>
                             </div>
                             <div className="grid gap-2">
@@ -183,7 +231,7 @@ export function Playground() {
                                 <div className="flex items-center gap-4">
                                     <div
                                         className="w-16 text-right text-sm font-medium text-gray-500 dark:text-gray-400">HSL</div>
-                                    <div className="flex-1 text-lg font-semibold text-gray-900 dark:text-gray-50">0°, 100%, 50%</div>
+                                    <div className="flex-1 text-lg font-semibold text-gray-900 dark:text-gray-50">{defaultHue}°, {defaultSaturation}%, {defaultBrightness}%</div>
                                 </div>
                             </div>
                         </div>
