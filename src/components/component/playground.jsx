@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button"
 import { useEffect, useState } from "react";
 import Upload from "./upload";
 import { Slider } from "@/components/ui/slider";
+import { Toaster, toast } from "sonner";
 
 export function Playground() {
 
@@ -106,6 +107,15 @@ export function Playground() {
         setDefaultHue(hsl.h);
         setDefaultSaturation(hsl.s);
         setDefaultBrightness(hsl.l);
+
+        toast.success("Color picked from image",
+            {
+                action: {
+                    label: "Close",
+                    onClick: () => toast.dismiss(),
+                }
+            }
+        );
     };
 
     const hexToRgb = (hex) => {
@@ -154,14 +164,35 @@ export function Playground() {
 
     function CopyRGB() {
         navigator.clipboard.writeText(`${rValue}, ${gValue}, ${bValue}`);
+        toast.success("Copied RGB value to clipboard",
+            {
+                action: {
+                    label: "Close",
+                    onClick: () => toast.dismiss(),
+                }
+            });
     }
 
     function CopyHEX() {
         navigator.clipboard.writeText(hexValue);
+        toast.success("Copied HEX value to clipboard",
+            {
+                action: {
+                    label: "Close",
+                    onClick: () => toast.dismiss(),
+                }
+            });
     }
 
     function CopyHSL() {
         navigator.clipboard.writeText(`${defaultHue}°, ${defaultSaturation}%, ${defaultBrightness}%`);
+        toast.success("Copied HSL value to clipboard",
+            {
+                action: {
+                    label: "Close",
+                    onClick: () => toast.dismiss(),
+                }
+            });
     }
 
     if (!imageUploaded) {
@@ -174,6 +205,7 @@ export function Playground() {
         return (
             <div
                 className="flex flex-col items-center justify-center p-4 h-screen bg-gray-100 dark:bg-gray-950 ">
+                <Toaster />
                 <div
                     className="max-w-3xl w-full bg-white dark:bg-gray-900 rounded-lg shadow-lg overflow-hidden">
                     <div className="grid grid-cols-2 gap-6 p-6">
