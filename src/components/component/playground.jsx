@@ -37,8 +37,35 @@ export function Playground() {
     useEffect(() => {
         const storedImage = localStorage.getItem('uploadedImage');
         if (storedImage) {
-            setImage(storedImage);
-            extractColorsFromBase64(storedImage);
+            // check width and height of image, if long add black on either side to make it square
+            const img = new Image();
+            img.src = storedImage;
+            img.onload = () => {
+                const canvas = document.createElement('canvas');
+                const ctx = canvas.getContext('2d');
+                const width = img.width;
+                const height = img.height;
+                if (width > height) {
+                    canvas.width = width;
+                    canvas.height = width;
+                    ctx.fillStyle = 'black';
+                    ctx.fillRect(0, 0, width, width);
+                    ctx.drawImage(img, 0, (width - height) / 2, width, height);
+                } else if (height > width) {
+                    canvas.width = height;
+                    canvas.height = height;
+                    ctx.fillStyle = 'black';
+                    ctx.fillRect(0, 0, height, height);
+                    ctx.drawImage(img, (height - width) / 2, 0, width, height);
+                } else {
+                    canvas.width = width;
+                    canvas.height = height;
+                    ctx.drawImage(img, 0, 0, width, height);
+                }
+                const dataURL = canvas.toDataURL('image/png');
+                setImage(dataURL);
+                extractColorsFromBase64(dataURL);
+            };
         }
     }, []);
 
