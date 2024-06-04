@@ -177,7 +177,7 @@ export function Playground() {
                 <div
                     className="max-w-3xl w-full bg-white dark:bg-gray-900 rounded-lg shadow-lg overflow-hidden">
                     <div className="grid grid-cols-2 gap-6 p-6">
-                        <div className="relative">
+                        <div className="relative flex justify-center items-center h-full">
                             <img
                                 alt="Uploaded Image"
                                 className="w-full h-full object-cover rounded-lg"
@@ -189,8 +189,8 @@ export function Playground() {
                                 }}
                                 width={500} />
                             <div className="absolute inset-0 flex items-center justify-center border-black" style={{ userSelect: "none", overflow: "hidden", scrollbarWidth: "none" }}>
-                                <div className="bg-black dark:bg-white rounded-lg border-black shadow-lg object-cover overflow-auto" style={{ aspectRatio: "500/500", objectFit: "cover", scrollbarWidth: "none" }}>
-                                    {image !== null ? <img src={image} onClick={handleImageClick} alt="Uploaded Image" className="object-contain" /> : <EyeIcon className="w-6 h-6 text-gray-500 dark:text-gray-400" />}
+                                <div className="max-w-full max-h-full relative bg-black dark:bg-white rounded-lg border-black shadow-lg object-cover content-center overflow-auto" style={{ aspectRatio: "500/500", objectFit: "cover", scrollbarWidth: "none" }}>
+                                    {image !== null ? <img src={image} onClick={handleImageClick} alt="Uploaded Image" className="object-contain place-self-center" /> : <EyeIcon className="w-6 h-6 text-gray-500 dark:text-gray-400" />}
                                 </div>
                             </div>
                         </div>
