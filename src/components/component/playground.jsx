@@ -249,7 +249,7 @@ export function Playground() {
                                 <div className="flex items-center gap-4">
                                     <div
                                         className="w-16 text-right text-sm font-medium text-gray-500 dark:text-gray-400">Hue</div>
-                                    <Slider className="flex-1" defaultValue={[defaultHue]} max={360} step={1} onChange={(value) => setDefaultHue(value)}
+                                    <Slider className="flex-1" defaultValue={[defaultHue]} max={360} step={1} onValueChange={(value) => setDefaultHue(value)}
                                     />
                                     <div
                                         className="w-16 text-right text-sm font-medium text-gray-900 dark:text-gray-50">{defaultHue}°</div>
@@ -257,7 +257,7 @@ export function Playground() {
                                 <div className="flex items-center gap-4">
                                     <div
                                         className="w-16 text-right text-sm font-medium text-gray-500 dark:text-gray-400">Saturation</div>
-                                    <Slider className="flex-1" defaultValue={[defaultSaturation]} max={100} step={1} onChange={(value) => setDefaultSaturation(value)}
+                                    <Slider className="flex-1" defaultValue={[defaultSaturation]} max={100} step={1} onValueChange={(value) => setDefaultSaturation(value)}
                                     />
                                     <div
                                         className="w-16 text-right text-sm font-medium text-gray-900 dark:text-gray-50">{defaultSaturation}%</div>
@@ -265,7 +265,7 @@ export function Playground() {
                                 <div className="flex items-center gap-4">
                                     <div
                                         className="w-16 text-right text-sm font-medium text-gray-500 dark:text-gray-400">Brightness</div>
-                                    <Slider className="flex-1" defaultValue={[defaultBrightness]} max={100} step={1} onChange={(value) => setDefaultBrightness(value)}
+                                    <Slider className="flex-1" defaultValue={[defaultBrightness]} max={100} step={1} onValueChange={(value) => setDefaultBrightness(value)}
                                     />
                                     <div
                                         className="w-16 text-right text-sm font-medium text-gray-900 dark:text-gray-50">{defaultBrightness}%</div>
