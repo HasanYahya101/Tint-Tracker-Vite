@@ -9,7 +9,12 @@ const isDesktop = () => {
 };
 
 function App() {
-    if (isDesktop()) {
+    const [isDesktopDevice, setIsDesktopDevice] = React.useState(null);
+
+    React.useEffect(() => {
+        setIsDesktopDevice(isDesktop());
+    }, []);
+    if (isDesktopDevice === true) {
         return (
             <Playground />
         )
