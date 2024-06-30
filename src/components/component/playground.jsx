@@ -268,7 +268,9 @@ export function Playground() {
                 className="flex flex-col items-center justify-center p-4 h-screen bg-gray-100 dark:bg-gray-950 ">
                 <Toaster />
                 <div
-                    className="max-w-3xl w-full bg-white dark:bg-gray-900 rounded-lg shadow-lg overflow-hidden">
+                    className="max-w-3xl w-full bg-white dark:bg-gray-900 rounded-lg shadow-lg overflow-hidden"
+                    style={{ minHeight: "300px", minWidth: "700px" }}
+                >
                     <div className="grid grid-cols-2 gap-6 p-6">
                         <div className="relative flex justify-center items-center h-full">
                             <img
