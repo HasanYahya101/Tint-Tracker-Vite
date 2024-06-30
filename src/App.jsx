@@ -5,7 +5,8 @@ import Apology from './components/component/apology';
 const isDesktop = () => {
     const userAgent = window.navigator.userAgent.toLowerCase();
     const isMobile = /mobile|android|iphone|ipad|tablet|touch|samsung|fridge/i.test(userAgent);
-    return !isMobile;
+    const isSmallScreen = window.innerWidth <= 1024; // Adjust the screen width threshold as needed
+    return !isMobile && !isSmallScreen;
 };
 
 function App() {
