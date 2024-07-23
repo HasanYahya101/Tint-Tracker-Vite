@@ -272,6 +272,38 @@ export function Playground() {
         setHexValue(rgbToHex(rgb.r, rgb.g, rgb.b));
     };
 
+    const hsltoHex = (h, s, l) => {
+        const rgb = hslToRgb(h, s, l);
+        return rgbToHex(rgb.r, rgb.g, rgb.b);
+    };
+
+    const rvalueChanged = (value) => {
+        setRValue(value);
+        const hsl = rgbToHsl(value, gValue, bValue);
+        setDefaultHue(hsl.h);
+        setDefaultSaturation(hsl.s);
+        setDefaultBrightness(hsl.l);
+        setHexValue(hsltoHex(hsl.h, hsl.s, hsl.l));
+    };
+
+    const gvalueChanged = (value) => {
+        setGValue(value);
+        const hsl = rgbToHsl(rValue, value, bValue);
+        setDefaultHue(hsl.h);
+        setDefaultSaturation(hsl.s);
+        setDefaultBrightness(hsl.l);
+        setHexValue(hsltoHex(hsl.h, hsl.s, hsl.l));
+    };
+
+    const bvalueChanged = (value) => {
+        setBValue(value);
+        const hsl = rgbToHsl(rValue, gValue, value);
+        setDefaultHue(hsl.h);
+        setDefaultSaturation(hsl.s);
+        setDefaultBrightness(hsl.l);
+        setHexValue(hsltoHex(hsl.h, hsl.s, hsl.l));
+    };
+
     if (!imageUploaded) {
         return (
             <Upload setImage={setImage} setImageUploaded={setImageUploaded} image={image} imageUploaded={imageUploaded}
@@ -366,26 +398,26 @@ export function Playground() {
                                         <div className="flex items-center gap-4">
                                             <div
                                                 className="w-16 text-right text-sm font-medium text-gray-500 dark:text-gray-400">Red</div>
-                                            <Slider className="flex-1" value={[defaultHue]} max={255} step={1} onValueChange={(value) => hvalueChanged(value)}
+                                            <Slider className="flex-1" value={[rValue]} max={255} step={1} onValueChange={(value) => rvalueChanged(value)}
                                             />
                                             <div
-                                                className="w-16 text-right text-sm font-medium text-gray-900 dark:text-gray-50">{defaultHue}°</div>
+                                                className="w-16 text-right text-sm font-medium text-gray-900 dark:text-gray-50">{rValue}/255</div>
                                         </div>
                                         <div className="flex items-center gap-4">
                                             <div
                                                 className="w-16 text-right text-sm font-medium text-gray-500 dark:text-gray-400">Green</div>
-                                            <Slider className="flex-1" value={[defaultSaturation]} max={255} step={1} onValueChange={(value) => svalueChanged(value)}
+                                            <Slider className="flex-1" value={[gValue]} max={255} step={1} onValueChange={(value) => gvalueChanged(value)}
                                             />
                                             <div
-                                                className="w-16 text-right text-sm font-medium text-gray-900 dark:text-gray-50">{defaultSaturation}%</div>
+                                                className="w-16 text-right text-sm font-medium text-gray-900 dark:text-gray-50">{gValue}/255</div>
                                         </div>
                                         <div className="flex items-center gap-4">
                                             <div
                                                 className="w-16 text-right text-sm font-medium text-gray-500 dark:text-gray-400">Blue</div>
-                                            <Slider className="flex-1" value={[defaultBrightness]} max={255} step={1} onValueChange={(value) => _lvalueChanged(value)}
+                                            <Slider className="flex-1" value={[bValue]} max={255} step={1} onValueChange={(value) => bvalueChanged(value)}
                                             />
                                             <div
-                                                className="w-16 text-right text-sm font-medium text-gray-900 dark:text-gray-50">{defaultBrightness}%</div>
+                                                className="w-16 text-right text-sm font-medium text-gray-900 dark:text-gray-50">{bValue}/255</div>
                                         </div>
                                     </div>) : null}
                             <div className="grid gap-2">
