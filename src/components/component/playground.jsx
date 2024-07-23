@@ -559,7 +559,7 @@ export function Playground() {
                         <ContextMenuShortcut>{copyHSLShortcut}</ContextMenuShortcut>
                     </ContextMenuItem>
                     <ContextMenuSeparator />
-                    <ContextMenuItem inset onClick={switchMode}
+                    <ContextMenuItem inset onClick={() => switchMode()}
                     >
                         {sliderMode === "hsl" ? "Switch to RGB" : "Switch to HSL"}
                         <ContextMenuShortcut>{switchShortcut}</ContextMenuShortcut>
