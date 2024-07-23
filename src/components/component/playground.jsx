@@ -3,6 +3,12 @@ import { useEffect, useState } from "react";
 import Upload from "./upload";
 import { Slider } from "@/components/ui/slider";
 import { Toaster, toast } from "sonner";
+import {
+    Tooltip,
+    TooltipContent,
+    TooltipProvider,
+    TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 export function Playground() {
 
@@ -302,9 +308,18 @@ export function Playground() {
                                     >HEX</div>
                                     <div className="flex items-center gap-4">
                                         <div className="text-lg font-semibold text-gray-900 dark:text-gray-50">{hexValue}</div>
-                                        <Button variant="ghost" onClick={CopyHEX} className="max-h-12 max-w-12">
-                                            <CopyIcon className="w-4 h-4 text-gray-500 dark:text-gray-400" />
-                                        </Button>
+                                        <TooltipProvider>
+                                            <Tooltip>
+                                                <TooltipTrigger>
+                                                    <Button variant="ghost" onClick={CopyHEX} className="max-h-12 max-w-12">
+                                                        <CopyIcon className="w-4 h-4 text-gray-500 dark:text-gray-400" />
+                                                    </Button>
+                                                </TooltipTrigger>
+                                                <TooltipContent>
+                                                    <span className="text-sm text-muted-foreground">Copy HEX</span>
+                                                </TooltipContent>
+                                            </Tooltip>
+                                        </TooltipProvider>
                                     </div>
                                 </div>
                             </div>
@@ -336,13 +351,31 @@ export function Playground() {
                             </div>
                             <div className="grid gap-2">
                                 <div className="flex items-center gap-4">
-                                    <Button variant="ghost" onClick={CopyRGB}
-                                        className="w-16 text-right text-sm font-medium text-gray-500 dark:text-gray-400">RGB</Button>
+                                    <TooltipProvider>
+                                        <Tooltip>
+                                            <TooltipTrigger>
+                                                <Button variant="ghost" onClick={CopyRGB}
+                                                    className="w-16 text-right text-sm font-medium text-gray-500 dark:text-gray-400">RGB</Button>
+                                            </TooltipTrigger>
+                                            <TooltipContent>
+                                                <span className="text-sm text-muted-foreground">Copy RGB</span>
+                                            </TooltipContent>
+                                        </Tooltip>
+                                    </TooltipProvider>
                                     <div className="flex-1 text-lg font-semibold text-gray-900 dark:text-gray-50">{rValue}, {gValue}, {bValue}</div>
                                 </div>
                                 <div className="flex items-center gap-4">
-                                    <Button variant="ghost" onClick={CopyHSL}
-                                        className="w-16 text-right text-sm font-medium text-gray-500 dark:text-gray-400">HSL</Button>
+                                    <TooltipProvider>
+                                        <Tooltip>
+                                            <TooltipTrigger>
+                                                <Button variant="ghost" onClick={CopyHSL}
+                                                    className="w-16 text-right text-sm font-medium text-gray-500 dark:text-gray-400">HSL</Button>
+                                            </TooltipTrigger>
+                                            <TooltipContent>
+                                                <span className="text-sm text-muted-foreground">Copy HSL</span>
+                                            </TooltipContent>
+                                        </Tooltip>
+                                    </TooltipProvider>
                                     <div className="flex-1 text-lg font-semibold text-gray-900 dark:text-gray-50">{defaultHue}°, {defaultSaturation}%, {defaultBrightness}%</div>
                                 </div>
                             </div>
