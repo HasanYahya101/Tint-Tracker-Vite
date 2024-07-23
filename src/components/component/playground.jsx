@@ -319,6 +319,55 @@ export function Playground() {
         setHexValue(hsltoHex(hsl.h, hsl.s, hsl.l));
     };
 
+    const switchMode = () => {
+        setSliderMode(sliderMode === "hsl" ? "rgb" : "hsl");
+        toast.success(`Successfully Switched to ${sliderMode === "hsl" ? "RGB" : "HSL"} mode`,
+            {
+                action: {
+                    label: "Close",
+                    onClick: () => toast.dismiss(),
+                }
+            });
+        return;
+    };
+
+    const isMac = navigator.platform.toUpperCase().indexOf('MAC') >= 0;
+
+    const copyHEXShortcut = isMac ? "⌘Z" : "Ctrl+Z";
+    const copyRGBShortcut = isMac ? "⌘X" : "Ctrl+X";
+    const copyHSLShortcut = isMac ? "⌘C" : "Ctrl+C";
+    const switchShortcut = isMac ? "⌘V" : "Ctrl+V";
+
+    const handleShortcuts = (e) => {
+        const ctrlKey = e.metaKey || e.ctrlKey;
+        const shiftKey = e.shiftKey;
+        const altKey = e.altKey;
+        const ZKey = e.key === "z" || e.key === "Z";
+        const XKey = e.key === "x" || e.key === "X";
+        const CKey = e.key === "c" || e.key === "C";
+        const VKey = e.key === "v" || e.key === "V";
+        if (ctrlKey && ZKey && !shiftKey && !altKey) {
+            e.preventDefault();
+            CopyHEX();
+        } else if (ctrlKey && XKey && !shiftKey && !altKey) {
+            e.preventDefault();
+            CopyRGB();
+        } else if (ctrlKey && CKey && !shiftKey && !altKey) {
+            e.preventDefault();
+            CopyHSL();
+        } else if (ctrlKey && VKey && !shiftKey && !altKey) {
+            e.preventDefault();
+            switchMode();
+        }
+    };
+
+    useEffect(() => {
+        window.addEventListener("keydown", handleShortcuts);
+        return () => {
+            window.removeEventListener("keydown", handleShortcuts);
+        };
+    }, []);
+
     if (!imageUploaded) {
         return (
             <Upload setImage={setImage} setImageUploaded={setImageUploaded} image={image} imageUploaded={imageUploaded}
@@ -455,7 +504,7 @@ export function Playground() {
                                                 <Tooltip>
                                                     <TooltipTrigger>
                                                         <Button variant="outline" size="icon" className="h-8 w-8 text-right opacity-0 group-hover:opacity-100 group-hover:animate-fadeInLeft"
-                                                            onClick={() => setSliderMode("rgb")}
+                                                            onClick={switchMode}
                                                         >
                                                             <ArrowRightLeft className="w-4 h-4" />
                                                         </Button>
@@ -483,7 +532,7 @@ export function Playground() {
                                                 <Tooltip>
                                                     <TooltipTrigger>
                                                         <Button variant="outline" size="icon" className="h-8 w-8 text-right opacity-0 group-hover:opacity-100 group-hover:animate-fadeInLeft"
-                                                            onClick={() => setSliderMode("hsl")}
+                                                            onClick={switchMode}
                                                         >
                                                             <ArrowRightLeft className="w-4 h-4" />
                                                         </Button>
@@ -504,19 +553,23 @@ export function Playground() {
                     <ContextMenuItem inset onClick={CopyHEX}
                     >
                         Copy HEX
+                        <ContextMenuShortcut>{copyHEXShortcut}</ContextMenuShortcut>
                     </ContextMenuItem>
                     <ContextMenuItem inset onClick={CopyRGB}
                     >
                         Copy RGB
+                        <ContextMenuShortcut>{copyRGBShortcut}</ContextMenuShortcut>
                     </ContextMenuItem>
                     <ContextMenuItem inset onClick={CopyHSL}
                     >
                         Copy HSL
+                        <ContextMenuShortcut>{copyHSLShortcut}</ContextMenuShortcut>
                     </ContextMenuItem>
                     <ContextMenuSeparator />
-                    <ContextMenuItem inset onClick={() => setSliderMode(sliderMode === "hsl" ? "rgb" : "hsl")}
+                    <ContextMenuItem inset onClick={switchMode}
                     >
                         {sliderMode === "hsl" ? "Switch to RGB" : "Switch to HSL"}
+                        <ContextMenuShortcut>{switchShortcut}</ContextMenuShortcut>
                     </ContextMenuItem>
                 </ContextMenuContent>
             </ContextMenu>
