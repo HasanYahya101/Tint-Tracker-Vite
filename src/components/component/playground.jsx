@@ -342,7 +342,7 @@ export function Playground() {
                                 </div>
                                 <div className="flex items-center gap-4">
                                     <div
-                                        className="w-16 text-right text-sm font-medium text-gray-500 dark:text-gray-400">Brightness</div>
+                                        className="w-16 text-right text-sm font-medium text-gray-500 dark:text-gray-400">Lightness</div>
                                     <Slider className="flex-1" value={[defaultBrightness]} max={100} step={1} onValueChange={(value) => _lvalueChanged(value)}
                                     />
                                     <div
