@@ -364,6 +364,18 @@ export function Playground() {
                                         </Tooltip>
                                     </TooltipProvider>
                                     <div className="flex-1 text-lg font-semibold text-gray-900 dark:text-gray-50">{rValue}, {gValue}, {bValue}</div>
+                                    <TooltipProvider>
+                                        <Tooltip>
+                                            <TooltipTrigger>
+                                                <Button variant="outline" size="icon" className="h-8 w-8 text-right opacity-100 group-hover:opacity-100">
+                                                    <ArrowRightLeft className="w-4 h-4" />
+                                                </Button>
+                                            </TooltipTrigger>
+                                            <TooltipContent>
+                                                <span className="text-sm text-muted-foreground">Switch to RGB</span>
+                                            </TooltipContent>
+                                        </Tooltip>
+                                    </TooltipProvider>
                                 </div>
                                 <div className="flex items-center gap-4 group">
                                     <TooltipProvider>
@@ -378,6 +390,18 @@ export function Playground() {
                                         </Tooltip>
                                     </TooltipProvider>
                                     <div className="flex-1 text-lg font-semibold text-gray-900 dark:text-gray-50">{defaultHue}°, {defaultSaturation}%, {defaultBrightness}%</div>
+                                    <TooltipProvider>
+                                        <Tooltip>
+                                            <TooltipTrigger>
+                                                <Button variant="outline" size="icon" className="h-8 w-8 text-right opacity-100 group-hover:opacity-100">
+                                                    <ArrowRightLeft className="w-4 h-4" />
+                                                </Button>
+                                            </TooltipTrigger>
+                                            <TooltipContent>
+                                                <span className="text-sm text-muted-foreground">Switch to HSL</span>
+                                            </TooltipContent>
+                                        </Tooltip>
+                                    </TooltipProvider>
                                 </div>
                             </div>
                         </div>
