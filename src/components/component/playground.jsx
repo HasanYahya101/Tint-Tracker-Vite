@@ -312,7 +312,19 @@ export function Playground() {
         setHexValue(hsltoHex(hsl.h, hsl.s, hsl.l));
     };
 
-    const switchMode = () => {
+    const switchMode = (value = 'null') => {
+        if (value !== 'null') {
+            setSliderMode(value);
+            toast.success(`Successfully Switched to ${value === "hsl" ? "HSL" : "RGB"} mode`,
+                {
+                    action: {
+                        label: "Close",
+                        onClick: () => toast.dismiss(),
+                    }
+                });
+            return;
+        }
+
         setSliderMode(sliderMode === "hsl" ? "rgb" : "hsl");
         toast.success(`Successfully Switched to ${sliderMode === "hsl" ? "RGB" : "HSL"} mode`,
             {
@@ -332,10 +344,6 @@ export function Playground() {
     const switchShortcut = isMac ? "⌘V" : "Ctrl+V";
 
     const handleShortcuts = (e) => {
-        if (!imageUploaded) {
-            return
-        };
-
         const ctrlKey = e.metaKey || e.ctrlKey;
         const shiftKey = e.shiftKey;
         const altKey = e.altKey;
@@ -501,7 +509,7 @@ export function Playground() {
                                                 <Tooltip>
                                                     <TooltipTrigger>
                                                         <Button variant="outline" size="icon" className="h-8 w-8 text-right opacity-0 group-hover:opacity-100 group-hover:animate-fadeInLeft"
-                                                            onClick={switchMode}
+                                                            onClick={switchMode('rgb')}
                                                         >
                                                             <ArrowRightLeft className="w-4 h-4" />
                                                         </Button>
@@ -529,7 +537,7 @@ export function Playground() {
                                                 <Tooltip>
                                                     <TooltipTrigger>
                                                         <Button variant="outline" size="icon" className="h-8 w-8 text-right opacity-0 group-hover:opacity-100 group-hover:animate-fadeInLeft"
-                                                            onClick={switchMode}
+                                                            onClick={switchMode('hsl')}
                                                         >
                                                             <ArrowRightLeft className="w-4 h-4" />
                                                         </Button>
