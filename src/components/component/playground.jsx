@@ -9,6 +9,7 @@ import {
     TooltipProvider,
     TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { ArrowRightLeft } from "lucide-react";
 
 export function Playground() {
 
@@ -350,7 +351,7 @@ export function Playground() {
                                 </div>
                             </div>
                             <div className="grid gap-2">
-                                <div className="flex items-center gap-4">
+                                <div className="flex items-center gap-4 group">
                                     <TooltipProvider>
                                         <Tooltip>
                                             <TooltipTrigger>
@@ -364,7 +365,7 @@ export function Playground() {
                                     </TooltipProvider>
                                     <div className="flex-1 text-lg font-semibold text-gray-900 dark:text-gray-50">{rValue}, {gValue}, {bValue}</div>
                                 </div>
-                                <div className="flex items-center gap-4">
+                                <div className="flex items-center gap-4 group">
                                     <TooltipProvider>
                                         <Tooltip>
                                             <TooltipTrigger>
