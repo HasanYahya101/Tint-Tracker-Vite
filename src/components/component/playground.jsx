@@ -19,9 +19,9 @@ export function Playground() {
 
     const [defaultHue, setDefaultHue] = useState(0);
 
-    const [defaultSaturation, setDefaultSaturation] = useState(100);
+    const [defaultSaturation, setDefaultSaturation] = useState(85);
 
-    const [defaultBrightness, setDefaultBrightness] = useState(100);
+    const [defaultBrightness, setDefaultBrightness] = useState(65);
 
     const [rValue, setRValue] = useState(255);
 
@@ -31,7 +31,7 @@ export function Playground() {
 
     const [hexValue, setHexValue] = useState("#FF0000");
 
-
+    const [sliderMode, setSliderMode] = useState("hsl");
 
     const rgbToHex = (r, g, b) => {
         return `#${((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1)}`;
@@ -39,6 +39,15 @@ export function Playground() {
 
     useEffect(() => {
         localStorage.removeItem('uploadedImage');
+    }, []);
+
+    useEffect(() => {
+        const rgb = hslToRgb(defaultHue, defaultSaturation, defaultBrightness);
+        setRValue(rgb.r);
+        setGValue(rgb.g);
+        setBValue(rgb.b);
+
+        setHexValue(rgbToHex(rgb.r, rgb.g, rgb.b));
     }, []);
 
     useEffect(() => {
@@ -324,32 +333,61 @@ export function Playground() {
                                     </div>
                                 </div>
                             </div>
-                            <div className="grid gap-4">
-                                <div className="flex items-center gap-4">
-                                    <div
-                                        className="w-16 text-right text-sm font-medium text-gray-500 dark:text-gray-400">Hue</div>
-                                    <Slider className="flex-1" value={[defaultHue]} max={360} step={1} onValueChange={(value) => hvalueChanged(value)}
-                                    />
-                                    <div
-                                        className="w-16 text-right text-sm font-medium text-gray-900 dark:text-gray-50">{defaultHue}°</div>
-                                </div>
-                                <div className="flex items-center gap-4">
-                                    <div
-                                        className="w-16 text-right text-sm font-medium text-gray-500 dark:text-gray-400">Saturation</div>
-                                    <Slider className="flex-1" value={[defaultSaturation]} max={100} step={1} onValueChange={(value) => svalueChanged(value)}
-                                    />
-                                    <div
-                                        className="w-16 text-right text-sm font-medium text-gray-900 dark:text-gray-50">{defaultSaturation}%</div>
-                                </div>
-                                <div className="flex items-center gap-4">
-                                    <div
-                                        className="w-16 text-right text-sm font-medium text-gray-500 dark:text-gray-400">Lightness</div>
-                                    <Slider className="flex-1" value={[defaultBrightness]} max={100} step={1} onValueChange={(value) => _lvalueChanged(value)}
-                                    />
-                                    <div
-                                        className="w-16 text-right text-sm font-medium text-gray-900 dark:text-gray-50">{defaultBrightness}%</div>
-                                </div>
-                            </div>
+                            {sliderMode === "hsl" ? (
+                                <div className="grid gap-4">
+
+                                    <div className="flex items-center gap-4">
+                                        <div
+                                            className="w-16 text-right text-sm font-medium text-gray-500 dark:text-gray-400">Hue</div>
+                                        <Slider className="flex-1" value={[defaultHue]} max={360} step={1} onValueChange={(value) => hvalueChanged(value)}
+                                        />
+                                        <div
+                                            className="w-16 text-right text-sm font-medium text-gray-900 dark:text-gray-50">{defaultHue}°</div>
+                                    </div>
+                                    <div className="flex items-center gap-4">
+                                        <div
+                                            className="w-16 text-right text-sm font-medium text-gray-500 dark:text-gray-400">Saturation</div>
+                                        <Slider className="flex-1" value={[defaultSaturation]} max={100} step={1} onValueChange={(value) => svalueChanged(value)}
+                                        />
+                                        <div
+                                            className="w-16 text-right text-sm font-medium text-gray-900 dark:text-gray-50">{defaultSaturation}%</div>
+                                    </div>
+                                    <div className="flex items-center gap-4">
+                                        <div
+                                            className="w-16 text-right text-sm font-medium text-gray-500 dark:text-gray-400">Lightness</div>
+                                        <Slider className="flex-1" value={[defaultBrightness]} max={100} step={1} onValueChange={(value) => _lvalueChanged(value)}
+                                        />
+                                        <div
+                                            className="w-16 text-right text-sm font-medium text-gray-900 dark:text-gray-50">{defaultBrightness}%</div>
+                                    </div>
+                                </div>) : sliderMode === "rgb" ? (
+                                    <div className="grid gap-4">
+
+                                        <div className="flex items-center gap-4">
+                                            <div
+                                                className="w-16 text-right text-sm font-medium text-gray-500 dark:text-gray-400">Red</div>
+                                            <Slider className="flex-1" value={[defaultHue]} max={255} step={1} onValueChange={(value) => hvalueChanged(value)}
+                                            />
+                                            <div
+                                                className="w-16 text-right text-sm font-medium text-gray-900 dark:text-gray-50">{defaultHue}°</div>
+                                        </div>
+                                        <div className="flex items-center gap-4">
+                                            <div
+                                                className="w-16 text-right text-sm font-medium text-gray-500 dark:text-gray-400">Green</div>
+                                            <Slider className="flex-1" value={[defaultSaturation]} max={255} step={1} onValueChange={(value) => svalueChanged(value)}
+                                            />
+                                            <div
+                                                className="w-16 text-right text-sm font-medium text-gray-900 dark:text-gray-50">{defaultSaturation}%</div>
+                                        </div>
+                                        <div className="flex items-center gap-4">
+                                            <div
+                                                className="w-16 text-right text-sm font-medium text-gray-500 dark:text-gray-400">Blue</div>
+                                            <Slider className="flex-1" value={[defaultBrightness]} max={255} step={1} onValueChange={(value) => _lvalueChanged(value)}
+                                            />
+                                            <div
+                                                className="w-16 text-right text-sm font-medium text-gray-900 dark:text-gray-50">{defaultBrightness}%</div>
+                                        </div>
+                                    </div>) : null}
                             <div className="grid gap-2">
                                 <div className="flex items-center gap-4 group">
                                     <TooltipProvider>
@@ -367,7 +405,9 @@ export function Playground() {
                                     <TooltipProvider>
                                         <Tooltip>
                                             <TooltipTrigger>
-                                                <Button variant="outline" size="icon" className="h-8 w-8 text-right opacity-100 group-hover:opacity-100">
+                                                <Button variant="outline" size="icon" className="h-8 w-8 text-right opacity-0 group-hover:opacity-100 group-hover:animate-fadeInLeft"
+                                                    onClick={() => setSliderMode("rgb")}
+                                                >
                                                     <ArrowRightLeft className="w-4 h-4" />
                                                 </Button>
                                             </TooltipTrigger>
@@ -393,7 +433,9 @@ export function Playground() {
                                     <TooltipProvider>
                                         <Tooltip>
                                             <TooltipTrigger>
-                                                <Button variant="outline" size="icon" className="h-8 w-8 text-right opacity-100 group-hover:opacity-100">
+                                                <Button variant="outline" size="icon" className="h-8 w-8 text-right opacity-0 group-hover:opacity-100 group-hover:animate-fadeInLeft"
+                                                    onClick={() => setSliderMode("hsl")}
+                                                >
                                                     <ArrowRightLeft className="w-4 h-4" />
                                                 </Button>
                                             </TooltipTrigger>
