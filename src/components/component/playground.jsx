@@ -10,6 +10,21 @@ import {
     TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { ArrowRightLeft } from "lucide-react";
+import {
+    ContextMenu,
+    ContextMenuCheckboxItem,
+    ContextMenuContent,
+    ContextMenuItem,
+    ContextMenuLabel,
+    ContextMenuRadioGroup,
+    ContextMenuRadioItem,
+    ContextMenuSeparator,
+    ContextMenuShortcut,
+    ContextMenuSub,
+    ContextMenuSubContent,
+    ContextMenuSubTrigger,
+    ContextMenuTrigger,
+} from "@/components/ui/context-menu";
 
 export function Playground() {
 
@@ -312,176 +327,199 @@ export function Playground() {
     }
     else {
         return (
-            <div
-                className="flex flex-col items-center justify-center p-4 h-screen bg-gray-100 dark:bg-gray-950 ">
-                <Toaster />
-                <div
-                    className="max-w-3xl w-full bg-white dark:bg-gray-900 rounded-lg shadow-lg overflow-hidden"
-                    style={{ minHeight: "300px", minWidth: "700px" }}
-                >
-                    <div className="grid grid-cols-2 gap-6 p-6">
-                        <div className="relative flex justify-center items-center h-full">
-                            <img
-                                alt="Uploaded Image"
-                                className="w-full h-full object-cover rounded-lg"
-                                height={500}
-                                src="/placeholder.svg"
-                                style={{
-                                    aspectRatio: "500/500",
-                                    objectFit: "cover",
-                                }}
-                                width={500} />
-                            <div className="absolute inset-0 flex items-center justify-center border-black" style={{ userSelect: "none", overflow: "hidden", scrollbarWidth: "none" }}>
-                                <div className="max-w-full max-h-full relative bg-black dark:bg-white rounded-lg border-black shadow-lg object-cover content-center overflow-auto" style={{ aspectRatio: "500/500", objectFit: "cover", scrollbarWidth: "none" }}>
-                                    {image !== null ? <img src={image} onClick={handleImageClick} alt="Uploaded Image" className="object-contain place-self-center" /> : <EyeIcon className="w-6 h-6 text-gray-500 dark:text-gray-400" />}
-                                </div>
-                            </div>
-                        </div>
-                        <div className="flex flex-col gap-6">
-                            <div className="flex items-center gap-4">
-                                <div
-                                    className="w-16 h-16 rounded-full border-4 border-gray-200 dark:border-gray-800 flex items-center justify-center">
-                                    <div className="w-10 h-10 rounded-full border"
-                                        style={{ backgroundColor: rgbToHex(rValue, gValue, bValue) }}
-                                    />
-                                </div>
-                                <div className="flex-1 grid gap-1">
-                                    <div className="w-20 text-sm font-medium text-gray-500 dark:text-gray-400"
-                                    >HEX</div>
-                                    <div className="flex items-center gap-4">
-                                        <div className="text-lg font-semibold text-gray-900 dark:text-gray-50">{hexValue}</div>
-                                        <TooltipProvider>
-                                            <Tooltip>
-                                                <TooltipTrigger>
-                                                    <Button variant="ghost" onClick={CopyHEX} className="max-h-12 max-w-12">
-                                                        <CopyIcon className="w-4 h-4 text-gray-500 dark:text-gray-400" />
-                                                    </Button>
-                                                </TooltipTrigger>
-                                                <TooltipContent>
-                                                    <span className="text-sm text-muted-foreground">Copy HEX</span>
-                                                </TooltipContent>
-                                            </Tooltip>
-                                        </TooltipProvider>
+            <ContextMenu>
+                <ContextMenuTrigger>
+                    <div
+                        className="flex flex-col items-center justify-center p-4 h-screen bg-gray-100 dark:bg-gray-950 ">
+                        <Toaster />
+                        <div
+                            className="max-w-3xl w-full bg-white dark:bg-gray-900 rounded-lg shadow-lg overflow-hidden"
+                            style={{ minHeight: "300px", minWidth: "700px" }}
+                        >
+                            <div className="grid grid-cols-2 gap-6 p-6">
+                                <div className="relative flex justify-center items-center h-full">
+                                    <img
+                                        alt="Uploaded Image"
+                                        className="w-full h-full object-cover rounded-lg"
+                                        height={500}
+                                        src="/placeholder.svg"
+                                        style={{
+                                            aspectRatio: "500/500",
+                                            objectFit: "cover",
+                                        }}
+                                        width={500} />
+                                    <div className="absolute inset-0 flex items-center justify-center border-black" style={{ userSelect: "none", overflow: "hidden", scrollbarWidth: "none" }}>
+                                        <div className="max-w-full max-h-full relative bg-black dark:bg-white rounded-lg border-black shadow-lg object-cover content-center overflow-auto" style={{ aspectRatio: "500/500", objectFit: "cover", scrollbarWidth: "none" }}>
+                                            {image !== null ? <img src={image} onClick={handleImageClick} alt="Uploaded Image" className="object-contain place-self-center" /> : <EyeIcon className="w-6 h-6 text-gray-500 dark:text-gray-400" />}
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            {sliderMode === "hsl" ? (
-                                <div className="grid gap-4">
+                                <div className="flex flex-col gap-6">
+                                    <div className="flex items-center gap-4">
+                                        <div
+                                            className="w-16 h-16 rounded-full border-4 border-gray-200 dark:border-gray-800 flex items-center justify-center">
+                                            <div className="w-10 h-10 rounded-full border"
+                                                style={{ backgroundColor: rgbToHex(rValue, gValue, bValue) }}
+                                            />
+                                        </div>
+                                        <div className="flex-1 grid gap-1">
+                                            <div className="w-20 text-sm font-medium text-gray-500 dark:text-gray-400"
+                                            >HEX</div>
+                                            <div className="flex items-center gap-4">
+                                                <div className="text-lg font-semibold text-gray-900 dark:text-gray-50">{hexValue}</div>
+                                                <TooltipProvider>
+                                                    <Tooltip>
+                                                        <TooltipTrigger>
+                                                            <Button variant="ghost" onClick={CopyHEX} className="max-h-12 max-w-12">
+                                                                <CopyIcon className="w-4 h-4 text-gray-500 dark:text-gray-400" />
+                                                            </Button>
+                                                        </TooltipTrigger>
+                                                        <TooltipContent>
+                                                            <span className="text-sm text-muted-foreground">Copy HEX</span>
+                                                        </TooltipContent>
+                                                    </Tooltip>
+                                                </TooltipProvider>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {sliderMode === "hsl" ? (
+                                        <div className="grid gap-4">
 
-                                    <div className="flex items-center gap-4">
-                                        <div
-                                            className="w-16 text-right text-sm font-medium text-gray-500 dark:text-gray-400">Hue</div>
-                                        <Slider className="flex-1" value={[defaultHue]} max={360} step={1} onValueChange={(value) => hvalueChanged(value)}
-                                        />
-                                        <div
-                                            className="w-16 text-right text-sm font-medium text-gray-900 dark:text-gray-50">{defaultHue}°</div>
-                                    </div>
-                                    <div className="flex items-center gap-4">
-                                        <div
-                                            className="w-16 text-right text-sm font-medium text-gray-500 dark:text-gray-400">Saturation</div>
-                                        <Slider className="flex-1" value={[defaultSaturation]} max={100} step={1} onValueChange={(value) => svalueChanged(value)}
-                                        />
-                                        <div
-                                            className="w-16 text-right text-sm font-medium text-gray-900 dark:text-gray-50">{defaultSaturation}%</div>
-                                    </div>
-                                    <div className="flex items-center gap-4">
-                                        <div
-                                            className="w-16 text-right text-sm font-medium text-gray-500 dark:text-gray-400">Lightness</div>
-                                        <Slider className="flex-1" value={[defaultBrightness]} max={100} step={1} onValueChange={(value) => _lvalueChanged(value)}
-                                        />
-                                        <div
-                                            className="w-16 text-right text-sm font-medium text-gray-900 dark:text-gray-50">{defaultBrightness}%</div>
-                                    </div>
-                                </div>) : sliderMode === "rgb" ? (
-                                    <div className="grid gap-4">
+                                            <div className="flex items-center gap-4">
+                                                <div
+                                                    className="w-16 text-right text-sm font-medium text-gray-500 dark:text-gray-400">Hue</div>
+                                                <Slider className="flex-1" value={[defaultHue]} max={360} step={1} onValueChange={(value) => hvalueChanged(value)}
+                                                />
+                                                <div
+                                                    className="w-16 text-right text-sm font-medium text-gray-900 dark:text-gray-50">{defaultHue}°</div>
+                                            </div>
+                                            <div className="flex items-center gap-4">
+                                                <div
+                                                    className="w-16 text-right text-sm font-medium text-gray-500 dark:text-gray-400">Saturation</div>
+                                                <Slider className="flex-1" value={[defaultSaturation]} max={100} step={1} onValueChange={(value) => svalueChanged(value)}
+                                                />
+                                                <div
+                                                    className="w-16 text-right text-sm font-medium text-gray-900 dark:text-gray-50">{defaultSaturation}%</div>
+                                            </div>
+                                            <div className="flex items-center gap-4">
+                                                <div
+                                                    className="w-16 text-right text-sm font-medium text-gray-500 dark:text-gray-400">Lightness</div>
+                                                <Slider className="flex-1" value={[defaultBrightness]} max={100} step={1} onValueChange={(value) => _lvalueChanged(value)}
+                                                />
+                                                <div
+                                                    className="w-16 text-right text-sm font-medium text-gray-900 dark:text-gray-50">{defaultBrightness}%</div>
+                                            </div>
+                                        </div>) : sliderMode === "rgb" ? (
+                                            <div className="grid gap-4">
 
-                                        <div className="flex items-center gap-4">
-                                            <div
-                                                className="w-16 text-right text-sm font-medium text-gray-500 dark:text-gray-400">Red</div>
-                                            <Slider className="flex-1" value={[rValue]} max={255} step={1} onValueChange={(value) => rvalueChanged(value)}
-                                            />
-                                            <div
-                                                className="w-16 text-right text-sm font-medium text-gray-900 dark:text-gray-50">{rValue}/255</div>
+                                                <div className="flex items-center gap-4">
+                                                    <div
+                                                        className="w-16 text-right text-sm font-medium text-gray-500 dark:text-gray-400">Red</div>
+                                                    <Slider className="flex-1" value={[rValue]} max={255} step={1} onValueChange={(value) => rvalueChanged(value)}
+                                                    />
+                                                    <div
+                                                        className="w-16 text-right text-sm font-medium text-gray-900 dark:text-gray-50">{rValue}/255</div>
+                                                </div>
+                                                <div className="flex items-center gap-4">
+                                                    <div
+                                                        className="w-16 text-right text-sm font-medium text-gray-500 dark:text-gray-400">Green</div>
+                                                    <Slider className="flex-1" value={[gValue]} max={255} step={1} onValueChange={(value) => gvalueChanged(value)}
+                                                    />
+                                                    <div
+                                                        className="w-16 text-right text-sm font-medium text-gray-900 dark:text-gray-50">{gValue}/255</div>
+                                                </div>
+                                                <div className="flex items-center gap-4">
+                                                    <div
+                                                        className="w-16 text-right text-sm font-medium text-gray-500 dark:text-gray-400">Blue</div>
+                                                    <Slider className="flex-1" value={[bValue]} max={255} step={1} onValueChange={(value) => bvalueChanged(value)}
+                                                    />
+                                                    <div
+                                                        className="w-16 text-right text-sm font-medium text-gray-900 dark:text-gray-50">{bValue}/255</div>
+                                                </div>
+                                            </div>) : null}
+                                    <div className="grid gap-2">
+                                        <div className="flex items-center gap-4 group">
+                                            <TooltipProvider>
+                                                <Tooltip>
+                                                    <TooltipTrigger>
+                                                        <Button variant="ghost" onClick={CopyRGB}
+                                                            className="w-16 text-right text-sm font-medium text-gray-500 dark:text-gray-400">RGB</Button>
+                                                    </TooltipTrigger>
+                                                    <TooltipContent>
+                                                        <span className="text-sm text-muted-foreground">Copy RGB</span>
+                                                    </TooltipContent>
+                                                </Tooltip>
+                                            </TooltipProvider>
+                                            <div className="flex-1 text-lg font-semibold text-gray-900 dark:text-gray-50">{rValue}, {gValue}, {bValue}</div>
+                                            <TooltipProvider>
+                                                <Tooltip>
+                                                    <TooltipTrigger>
+                                                        <Button variant="outline" size="icon" className="h-8 w-8 text-right opacity-0 group-hover:opacity-100 group-hover:animate-fadeInLeft"
+                                                            onClick={() => setSliderMode("rgb")}
+                                                        >
+                                                            <ArrowRightLeft className="w-4 h-4" />
+                                                        </Button>
+                                                    </TooltipTrigger>
+                                                    <TooltipContent>
+                                                        <span className="text-sm text-muted-foreground">Switch to RGB</span>
+                                                    </TooltipContent>
+                                                </Tooltip>
+                                            </TooltipProvider>
                                         </div>
-                                        <div className="flex items-center gap-4">
-                                            <div
-                                                className="w-16 text-right text-sm font-medium text-gray-500 dark:text-gray-400">Green</div>
-                                            <Slider className="flex-1" value={[gValue]} max={255} step={1} onValueChange={(value) => gvalueChanged(value)}
-                                            />
-                                            <div
-                                                className="w-16 text-right text-sm font-medium text-gray-900 dark:text-gray-50">{gValue}/255</div>
+                                        <div className="flex items-center gap-4 group">
+                                            <TooltipProvider>
+                                                <Tooltip>
+                                                    <TooltipTrigger>
+                                                        <Button variant="ghost" onClick={CopyHSL}
+                                                            className="w-16 text-right text-sm font-medium text-gray-500 dark:text-gray-400">HSL</Button>
+                                                    </TooltipTrigger>
+                                                    <TooltipContent>
+                                                        <span className="text-sm text-muted-foreground">Copy HSL</span>
+                                                    </TooltipContent>
+                                                </Tooltip>
+                                            </TooltipProvider>
+                                            <div className="flex-1 text-lg font-semibold text-gray-900 dark:text-gray-50">{defaultHue}°, {defaultSaturation}%, {defaultBrightness}%</div>
+                                            <TooltipProvider>
+                                                <Tooltip>
+                                                    <TooltipTrigger>
+                                                        <Button variant="outline" size="icon" className="h-8 w-8 text-right opacity-0 group-hover:opacity-100 group-hover:animate-fadeInLeft"
+                                                            onClick={() => setSliderMode("hsl")}
+                                                        >
+                                                            <ArrowRightLeft className="w-4 h-4" />
+                                                        </Button>
+                                                    </TooltipTrigger>
+                                                    <TooltipContent>
+                                                        <span className="text-sm text-muted-foreground">Switch to HSL</span>
+                                                    </TooltipContent>
+                                                </Tooltip>
+                                            </TooltipProvider>
                                         </div>
-                                        <div className="flex items-center gap-4">
-                                            <div
-                                                className="w-16 text-right text-sm font-medium text-gray-500 dark:text-gray-400">Blue</div>
-                                            <Slider className="flex-1" value={[bValue]} max={255} step={1} onValueChange={(value) => bvalueChanged(value)}
-                                            />
-                                            <div
-                                                className="w-16 text-right text-sm font-medium text-gray-900 dark:text-gray-50">{bValue}/255</div>
-                                        </div>
-                                    </div>) : null}
-                            <div className="grid gap-2">
-                                <div className="flex items-center gap-4 group">
-                                    <TooltipProvider>
-                                        <Tooltip>
-                                            <TooltipTrigger>
-                                                <Button variant="ghost" onClick={CopyRGB}
-                                                    className="w-16 text-right text-sm font-medium text-gray-500 dark:text-gray-400">RGB</Button>
-                                            </TooltipTrigger>
-                                            <TooltipContent>
-                                                <span className="text-sm text-muted-foreground">Copy RGB</span>
-                                            </TooltipContent>
-                                        </Tooltip>
-                                    </TooltipProvider>
-                                    <div className="flex-1 text-lg font-semibold text-gray-900 dark:text-gray-50">{rValue}, {gValue}, {bValue}</div>
-                                    <TooltipProvider>
-                                        <Tooltip>
-                                            <TooltipTrigger>
-                                                <Button variant="outline" size="icon" className="h-8 w-8 text-right opacity-0 group-hover:opacity-100 group-hover:animate-fadeInLeft"
-                                                    onClick={() => setSliderMode("rgb")}
-                                                >
-                                                    <ArrowRightLeft className="w-4 h-4" />
-                                                </Button>
-                                            </TooltipTrigger>
-                                            <TooltipContent>
-                                                <span className="text-sm text-muted-foreground">Switch to RGB</span>
-                                            </TooltipContent>
-                                        </Tooltip>
-                                    </TooltipProvider>
-                                </div>
-                                <div className="flex items-center gap-4 group">
-                                    <TooltipProvider>
-                                        <Tooltip>
-                                            <TooltipTrigger>
-                                                <Button variant="ghost" onClick={CopyHSL}
-                                                    className="w-16 text-right text-sm font-medium text-gray-500 dark:text-gray-400">HSL</Button>
-                                            </TooltipTrigger>
-                                            <TooltipContent>
-                                                <span className="text-sm text-muted-foreground">Copy HSL</span>
-                                            </TooltipContent>
-                                        </Tooltip>
-                                    </TooltipProvider>
-                                    <div className="flex-1 text-lg font-semibold text-gray-900 dark:text-gray-50">{defaultHue}°, {defaultSaturation}%, {defaultBrightness}%</div>
-                                    <TooltipProvider>
-                                        <Tooltip>
-                                            <TooltipTrigger>
-                                                <Button variant="outline" size="icon" className="h-8 w-8 text-right opacity-0 group-hover:opacity-100 group-hover:animate-fadeInLeft"
-                                                    onClick={() => setSliderMode("hsl")}
-                                                >
-                                                    <ArrowRightLeft className="w-4 h-4" />
-                                                </Button>
-                                            </TooltipTrigger>
-                                            <TooltipContent>
-                                                <span className="text-sm text-muted-foreground">Switch to HSL</span>
-                                            </TooltipContent>
-                                        </Tooltip>
-                                    </TooltipProvider>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
+                </ContextMenuTrigger>
+                <ContextMenuContent className="w-64">
+                    <ContextMenuItem inset onClick={CopyHEX}
+                    >
+                        Copy HEX
+                    </ContextMenuItem>
+                    <ContextMenuItem inset onClick={CopyRGB}
+                    >
+                        Copy RGB
+                    </ContextMenuItem>
+                    <ContextMenuItem inset onClick={CopyHSL}
+                    >
+                        Copy HSL
+                    </ContextMenuItem>
+                    <ContextMenuSeparator />
+                    <ContextMenuItem inset onClick={() => setSliderMode(sliderMode === "hsl" ? "rgb" : "hsl")}
+                    >
+                        {sliderMode === "hsl" ? "Switch to RGB" : "Switch to HSL"}
+                    </ContextMenuItem>
+                </ContextMenuContent>
+            </ContextMenu>
         );
     }
 
