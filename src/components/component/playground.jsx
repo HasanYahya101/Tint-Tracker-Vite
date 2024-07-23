@@ -329,7 +329,7 @@ export function Playground() {
     const copyHEXShortcut = isMac ? "⌘Z" : "Ctrl+Z";
     const copyRGBShortcut = isMac ? "⌘X" : "Ctrl+X";
     const copyHSLShortcut = isMac ? "⌘C" : "Ctrl+C";
-    const switchShortcut = isMac ? "⌘V" : "Ctrl+V";
+    const switchShortcut = isMac ? "⌘M" : "Ctrl+M";
 
     const handleShortcuts = (e) => {
         const ctrlKey = e.metaKey || e.ctrlKey;
@@ -338,7 +338,7 @@ export function Playground() {
         const ZKey = e.key === "z" || e.key === "Z";
         const XKey = e.key === "x" || e.key === "X";
         const CKey = e.key === "c" || e.key === "C";
-        const VKey = e.key === "v" || e.key === "V";
+        const MKey = e.key === "m" || e.key === "M";
         if (ctrlKey && ZKey && !shiftKey && !altKey) {
             e.preventDefault();
             CopyHEX();
@@ -348,7 +348,7 @@ export function Playground() {
         } else if (ctrlKey && CKey && !shiftKey && !altKey) {
             e.preventDefault();
             CopyHSL();
-        } else if (ctrlKey && VKey && !shiftKey && !altKey) {
+        } else if (ctrlKey && MKey && !shiftKey && !altKey) {
             e.preventDefault();
             switchMode();
         }
