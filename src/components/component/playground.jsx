@@ -299,7 +299,7 @@ export function Playground() {
                             <div className="flex items-center gap-4">
                                 <div
                                     className="w-16 h-16 rounded-full border-4 border-gray-200 dark:border-gray-800 flex items-center justify-center">
-                                    <div className="w-10 h-10 rounded-full"
+                                    <div className="w-10 h-10 rounded-full border"
                                         style={{ backgroundColor: rgbToHex(rValue, gValue, bValue) }}
                                     />
                                 </div>
