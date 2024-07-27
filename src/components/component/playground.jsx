@@ -429,7 +429,7 @@ export function Playground() {
                                                 <TooltipProvider>
                                                     <Tooltip>
                                                         <TooltipTrigger>
-                                                            <Button variant="ghost" onClick={CopyHEX} className="max-h-12 max-w-12">
+                                                            <Button variant="ghost" onClick={CopyHEX} className="max-h-12 max-w-12 ml-1" size="icon">
                                                                 <CopyIcon className="w-4 h-4 text-gray-500 dark:text-gray-400" />
                                                             </Button>
                                                         </TooltipTrigger>
