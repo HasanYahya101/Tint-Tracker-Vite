@@ -18,14 +18,14 @@ function App() {
     }, []);
     if (isDesktopDevice === true) {
         return (
-            <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+            <ThemeProvider defaultTheme="light" storageKey="vite-ui-theme">
                 <Playground />
             </ThemeProvider>
         )
     }
     else {
         return (
-            <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+            <ThemeProvider defaultTheme="light" storageKey="vite-ui-theme">
                 <Apology />
             </ThemeProvider>
         )
