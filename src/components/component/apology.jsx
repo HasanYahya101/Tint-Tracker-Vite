@@ -1,12 +1,31 @@
+import { useTheme } from "@/components/theme-provider";
+import { useEffect } from "react";
+
+const isDesktop = () => {
+    const userAgent = window.navigator.userAgent.toLowerCase();
+    const isMobile = /mobile|android|iphone|ipad|tablet|touch|samsung|fridge/i.test(userAgent);
+    const isSmallScreen = window.innerWidth <= 1024;
+    return !isMobile && !isSmallScreen;
+};
+
 export default function Apology() {
+    const { setTheme } = useTheme();
+    const isDesktopDevice = isDesktop();
+
+    useEffect(() => {
+        if (isDesktopDevice === false) {
+            setTheme("system");
+        }
+    }, []);
+
     return (
-        <div className="flex min-h-[100dvh] flex-col items-center justify-center bg-background px-4 py-12 sm:px-6 lg:px-8">
+        <div className="flex min-h-[100dvh] flex-col items-center justify-center bg-background dark:bg-black px-4 py-12 sm:px-6 lg:px-8">
             <div className="mx-auto max-w-md text-center">
                 <SmartphoneIcon className="mx-auto h-12 w-12 text-primary" />
-                <h1 className="mt-4 text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
+                <h1 className="mt-4 text-3xl font-bold tracking-tight text-foreground sm:text-4xl dark:text-white">
                     Sorry, this website is only available for desktop
                 </h1>
-                <p className="mt-4 text-muted-foreground">
+                <p className="mt-4 text-muted-foreground dark:text-gray-400">
                     We apologize for the inconvenience, but our website is currently optimized for desktop devices only. Please
                     try accessing this site from a computer or laptop.
                 </p>
