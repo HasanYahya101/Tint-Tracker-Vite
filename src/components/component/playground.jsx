@@ -9,7 +9,7 @@ import {
     TooltipProvider,
     TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { ArrowRightLeft } from "lucide-react";
+import { ArrowRightLeft, Copy, Sun, Moon } from "lucide-react";
 import {
     ContextMenu,
     ContextMenuContent,
@@ -18,6 +18,13 @@ import {
     ContextMenuShortcut,
     ContextMenuTrigger,
 } from "@/components/ui/context-menu";
+import {
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuItem,
+    DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { useTheme } from "@/components/theme-provider";
 
 export function Playground() {
 
@@ -378,6 +385,8 @@ export function Playground() {
         };
     }, []);
 
+    const { setTheme } = useTheme();
+
     if (!imageUploaded) {
         return (
             <Upload setImage={setImage} setImageUploaded={setImageUploaded} image={image} imageUploaded={imageUploaded}
@@ -387,6 +396,26 @@ export function Playground() {
     else {
         return (
             <ContextMenu>
+                <DropdownMenu>
+                    <DropdownMenuTrigger asChild>
+                        <Button variant="outline" size="icon" className="fixed top-6 right-6 z-50">
+                            <Sun className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
+                            <Moon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
+                            <span className="sr-only">Toggle theme</span>
+                        </Button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent align="end">
+                        <DropdownMenuItem onClick={() => setTheme("light")}>
+                            Light
+                        </DropdownMenuItem>
+                        <DropdownMenuItem onClick={() => setTheme("dark")}>
+                            Dark
+                        </DropdownMenuItem>
+                        <DropdownMenuItem onClick={() => setTheme("system")}>
+                            System
+                        </DropdownMenuItem>
+                    </DropdownMenuContent>
+                </DropdownMenu>
                 <ContextMenuTrigger>
                     <div
                         className="flex flex-col items-center justify-center p-4 h-screen bg-gray-100 dark:bg-gray-950 ">
@@ -429,8 +458,9 @@ export function Playground() {
                                                 <TooltipProvider>
                                                     <Tooltip>
                                                         <TooltipTrigger>
-                                                            <Button variant="ghost" onClick={CopyHEX} className="max-h-12 max-w-12 ml-1" size="icon">
-                                                                <CopyIcon className="w-4 h-4 text-gray-500 dark:text-gray-400" />
+                                                            <Button variant="ghost" onClick={CopyHEX} className="max-h-12 max-w-12" size="icon">
+                                                                <Copy className="w-4 h-4 text-black dark:text-white"
+                                                                />
                                                             </Button>
                                                         </TooltipTrigger>
                                                         <TooltipContent>

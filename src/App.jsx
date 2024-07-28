@@ -1,6 +1,7 @@
 import React from 'react';
 import { Playground } from './components/component/playground';
 import Apology from './components/component/apology';
+import { ThemeProvider } from './components/theme-provider';
 
 const isDesktop = () => {
     const userAgent = window.navigator.userAgent.toLowerCase();
@@ -17,13 +18,16 @@ function App() {
     }, []);
     if (isDesktopDevice === true) {
         return (
-            <Playground />
+            <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+                <Playground />
+            </ThemeProvider>
         )
     }
     else {
         return (
-            <Apology />
-
+            <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+                <Apology />
+            </ThemeProvider>
         )
     }
 }
