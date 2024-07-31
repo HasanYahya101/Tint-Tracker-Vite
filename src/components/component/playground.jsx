@@ -419,7 +419,8 @@ export function Playground() {
                 <ContextMenuTrigger>
                     <div
                         className="flex flex-col items-center justify-center p-4 h-screen bg-gray-100 dark:bg-gray-950 ">
-                        <Toaster />
+                        <Toaster theme={useTheme().theme}
+                        />
                         <div
                             className="max-w-3xl w-full bg-white dark:bg-gray-900 rounded-lg shadow-lg overflow-hidden"
                             style={{ minHeight: "300px", minWidth: "700px" }}
