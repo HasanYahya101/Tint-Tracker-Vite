@@ -9,7 +9,7 @@ import {
     TooltipProvider,
     TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { ArrowRightLeft, Copy, Sun, Moon } from "lucide-react";
+import { ArrowRightLeft, Copy, Sun, Moon, Clipboard, CopyCheck, Copyright } from "lucide-react";
 import {
     ContextMenu,
     ContextMenuContent,
@@ -418,7 +418,7 @@ export function Playground() {
                 </DropdownMenu>
                 <ContextMenuTrigger>
                     <div
-                        className="flex flex-col items-center justify-center p-4 h-screen bg-gray-100 dark:bg-gray-950 ">
+                        className="flex flex-col items-center justify-center p-4 h-screen bg-gray-100 dark:bg-black ">
                         <Toaster theme={useTheme().theme}
                         />
                         <div
@@ -541,20 +541,37 @@ export function Playground() {
                                                 </Tooltip>
                                             </TooltipProvider>
                                             <div className="flex-1 text-lg font-semibold text-gray-900 dark:text-gray-50">{rValue}, {gValue}, {bValue}</div>
-                                            <TooltipProvider>
-                                                <Tooltip>
-                                                    <TooltipTrigger>
-                                                        <Button variant="outline" size="icon" className="h-8 w-8 text-right opacity-0 group-hover:opacity-100 group-hover:animate-fadeInLeft"
-                                                            onClick={switchtoRGBMode}
-                                                        >
-                                                            <ArrowRightLeft className="w-4 h-4" />
-                                                        </Button>
-                                                    </TooltipTrigger>
-                                                    <TooltipContent>
-                                                        <span className="text-sm text-muted-foreground">Switch to RGB</span>
-                                                    </TooltipContent>
-                                                </Tooltip>
-                                            </TooltipProvider>
+                                            <div className="flex items-center gap-2.5 mr-1"
+                                            >
+                                                <TooltipProvider>
+                                                    <Tooltip>
+                                                        <TooltipTrigger>
+                                                            <Button variant="outline" size="icon" className="h-8 w-8 text-right opacity-0 group-hover:opacity-100 group-hover:animate-fadeInLeft"
+                                                                onClick={CopyRGB}
+                                                            >
+                                                                <Copy className="w-4 h-4" />
+                                                            </Button>
+                                                        </TooltipTrigger>
+                                                        <TooltipContent>
+                                                            <span className="text-sm text-muted-foreground">Copy RGB</span>
+                                                        </TooltipContent>
+                                                    </Tooltip>
+                                                </TooltipProvider>
+                                                <TooltipProvider>
+                                                    <Tooltip>
+                                                        <TooltipTrigger>
+                                                            <Button variant="outline" size="icon" className="h-8 w-8 text-right opacity-0 group-hover:opacity-100 group-hover:animate-fadeInLeft"
+                                                                onClick={switchtoRGBMode}
+                                                            >
+                                                                <ArrowRightLeft className="w-4 h-4" />
+                                                            </Button>
+                                                        </TooltipTrigger>
+                                                        <TooltipContent>
+                                                            <span className="text-sm text-muted-foreground">Switch to RGB</span>
+                                                        </TooltipContent>
+                                                    </Tooltip>
+                                                </TooltipProvider>
+                                            </div>
                                         </div>
                                         <div className="flex items-center gap-4 group">
                                             <TooltipProvider>
@@ -569,20 +586,37 @@ export function Playground() {
                                                 </Tooltip>
                                             </TooltipProvider>
                                             <div className="flex-1 text-lg font-semibold text-gray-900 dark:text-gray-50">{defaultHue}°, {defaultSaturation}%, {defaultBrightness}%</div>
-                                            <TooltipProvider>
-                                                <Tooltip>
-                                                    <TooltipTrigger>
-                                                        <Button variant="outline" size="icon" className="h-8 w-8 text-right opacity-0 group-hover:opacity-100 group-hover:animate-fadeInLeft"
-                                                            onClick={switchtoHSLMode}
-                                                        >
-                                                            <ArrowRightLeft className="w-4 h-4" />
-                                                        </Button>
-                                                    </TooltipTrigger>
-                                                    <TooltipContent>
-                                                        <span className="text-sm text-muted-foreground">Switch to HSL</span>
-                                                    </TooltipContent>
-                                                </Tooltip>
-                                            </TooltipProvider>
+                                            <div className="flex items-center gap-2.5 mr-1"
+                                            >
+                                                <TooltipProvider>
+                                                    <Tooltip>
+                                                        <TooltipTrigger>
+                                                            <Button variant="outline" size="icon" className="h-8 w-8 text-right opacity-0 group-hover:opacity-100 group-hover:animate-fadeInLeft"
+                                                                onClick={CopyHSL}
+                                                            >
+                                                                <Copy className="w-4 h-4" />
+                                                            </Button>
+                                                        </TooltipTrigger>
+                                                        <TooltipContent>
+                                                            <span className="text-sm text-muted-foreground">Copy HSL</span>
+                                                        </TooltipContent>
+                                                    </Tooltip>
+                                                </TooltipProvider>
+                                                <TooltipProvider>
+                                                    <Tooltip>
+                                                        <TooltipTrigger>
+                                                            <Button variant="outline" size="icon" className="h-8 w-8 text-right opacity-0 group-hover:opacity-100 group-hover:animate-fadeInLeft"
+                                                                onClick={switchtoHSLMode}
+                                                            >
+                                                                <ArrowRightLeft className="w-4 h-4" />
+                                                            </Button>
+                                                        </TooltipTrigger>
+                                                        <TooltipContent>
+                                                            <span className="text-sm text-muted-foreground">Switch to HSL</span>
+                                                        </TooltipContent>
+                                                    </Tooltip>
+                                                </TooltipProvider>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
