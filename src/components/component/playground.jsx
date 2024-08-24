@@ -418,11 +418,11 @@ export function Playground() {
                 </DropdownMenu>
                 <ContextMenuTrigger>
                     <div
-                        className="flex flex-col items-center justify-center p-4 h-screen bg-gray-100 dark:bg-black ">
+                        className="flex flex-col items-center justify-center p-4 h-screen bg-gray-100 dark:bg-gray-950 ">
                         <Toaster theme={useTheme().theme}
                         />
                         <div
-                            className="max-w-3xl w-full bg-white dark:bg-gray-900 rounded-lg shadow-lg overflow-hidden"
+                            className="max-w-3xl w-full bg-white dark:bg-gray-900 rounded-lg shadow-lg overflow-hidden dark:border"
                             style={{ minHeight: "300px", minWidth: "700px" }}
                         >
                             <div className="grid grid-cols-2 gap-6 p-6">
