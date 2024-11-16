@@ -160,7 +160,7 @@ export default function Component({ image, setImage, setImageUploaded, imageUplo
             <Toaster />
             <div className="max-w-4xl w-full p-4">
                 <div
-                    className="w-full aspect-video bg-gray-200 dark:bg-gray-800 rounded-lg overflow-hidden flex items-center justify-center cursor-pointer"
+                    className="w-full aspect-video bg-gray-200 dark:bg-gray-800 hover:bg-opacity-60 dark:hover:bg-opacity-80 rounded-lg overflow-hidden flex items-center justify-center cursor-pointer transition-opacity duration-300 ease-in-out"
                     onDragOver={handleDragOver}
                     onDrop={handleDrop}
                     onClick={handleDivClick}
