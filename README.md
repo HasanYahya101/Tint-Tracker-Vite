@@ -6,7 +6,7 @@ This is a basic Image Color Picker Web App that allows uploading of an Image and
 
 ## UI Library
 
-Radix UI and ShadCN components were used to create the UI of the website. Moreover, Vite was used to create this React Project.
+Radix UI and ShadCN UI components were used to create the UI of the website. Moreover, Vite was used to create this React Project.
 
 ## Deployment
 
