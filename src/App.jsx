@@ -3,6 +3,7 @@ import { Playground } from './components/component/playground';
 import Apology from './components/component/apology';
 import { ThemeProvider } from './components/theme-provider';
 
+// check if device is desktop or not
 const isDesktop = () => {
     const userAgent = window.navigator.userAgent.toLowerCase();
     const isMobile = /mobile|android|iphone|ipad|tablet|touch|samsung|fridge/i.test(userAgent);
